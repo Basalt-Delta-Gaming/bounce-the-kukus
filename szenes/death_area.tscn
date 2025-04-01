@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://n2tqnesbbu35"]
+
+[ext_resource type="Script" uid="uid://dhxhj45m402f5" path="res://scripts/death_area.gd" id="1_dyd64"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkcy4"]
+size = Vector2(80, 20)
+
+[node name="DeathArea" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_dyd64")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vkcy4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = -10.0
+offset_right = 40.0
+offset_bottom = 10.0
+color = Color(1, 0, 0, 0.396078)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

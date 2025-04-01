@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3t7d685hmt05"]
+[gd_scene load_steps=13 format=3 uid="uid://b3t7d685hmt05"]
 
 [ext_resource type="Script" uid="uid://dch0q3xtjgk10" path="res://scripts/player.gd" id="1_kcmy2"]
-[ext_resource type="Texture2D" uid="uid://bss4s55rgbflt" path="res://sprites/player_right.png" id="2_8wny0"]
+[ext_resource type="Resource" uid="uid://dq30gjiobsewr" path="res://resources/player_movement/player_base.tres" id="2_0fpbk"]
+[ext_resource type="Texture2D" uid="uid://dbd7s5nglcdpg" path="res://sprites/player.png" id="2_fyuex"]
+[ext_resource type="Resource" uid="uid://xnuafuq0srkw" path="res://resources/player_movement/base_move.tres" id="2_yke32"]
+[ext_resource type="Resource" uid="uid://ch0ifbhk20dn0" path="res://resources/player_movement/base_dash.tres" id="3_01xm4"]
 [ext_resource type="Script" uid="uid://cduhuhg4iryf0" path="res://scripts/ball.gd" id="3_8wny0"]
 [ext_resource type="Texture2D" uid="uid://be5wwo7on74y4" path="res://sprites/ball.png" id="4_fyuex"]
-
-[sub_resource type="Curve" id="Curve_fyuex"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.533074), -1.304, 0.0, 0, 0]
-point_count = 2
+[ext_resource type="Script" uid="uid://dj0cs2uiag7oy" path="res://player/states/state_machine.gd" id="6_r8rtt"]
+[ext_resource type="Script" uid="uid://bm2gdpgw3071t" path="res://scripts/item_none.gd" id="7_vcefd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyuex"]
 radius = 28.0
@@ -23,8 +24,10 @@ radius = 50.0
 [node name="PlayerController" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+collision_layer = 2
 script = ExtResource("1_kcmy2")
-dash_curve = SubResource("Curve_fyuex")
+MoveDev = ExtResource("2_yke32")
+DashDev = ExtResource("3_01xm4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 rotation = 1.5708
@@ -33,11 +36,13 @@ shape = SubResource("CapsuleShape2D_fyuex")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 scale = Vector2(0.385487, 0.42)
-texture = ExtResource("2_8wny0")
+texture = ExtResource("2_fyuex")
 
 [node name="Ball" type="RigidBody2D" parent="."]
 process_mode = 4
+visible = false
 position = Vector2(0, -45)
+collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_dykwt")
 gravity_scale = 0.7
 script = ExtResource("3_8wny0")
@@ -46,7 +51,18 @@ script = ExtResource("3_8wny0")
 shape = SubResource("CircleShape2D_dykwt")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
-scale = Vector2(0.404724, 0.404724)
+position = Vector2(-6, -5.96046e-08)
+scale = Vector2(0.45, 0.45)
 texture = ExtResource("4_fyuex")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_r8rtt")
+initial_state = NodePath("ItemNone")
+
+[node name="ItemNone" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("7_vcefd")
+player = NodePath("../../Player")
+item_settings = ExtResource("2_0fpbk")

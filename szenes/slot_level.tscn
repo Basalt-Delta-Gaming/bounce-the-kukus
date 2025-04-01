@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://damtteqgm0fsv"]
+
+[ext_resource type="Script" uid="uid://c0kvuwyj4xncb" path="res://scripts/slot_level.gd" id="1_61nyg"]
+[ext_resource type="Texture2D" uid="uid://1hidoh07lalq" path="res://sprites/level_background.png" id="1_spmhy"]
+
+[sub_resource type="Theme" id="Theme_spmhy"]
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 70
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -952.0
+offset_bottom = -552.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_61nyg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 126.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_spmhy")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -48.0
+offset_right = 41.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_spmhy")
+text = "1"
+horizontal_alignment = 1

@@ -1,19 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dul1rbi1hqalg"]
+[gd_scene load_steps=8 format=3 uid="uid://dul1rbi1hqalg"]
 
-[ext_resource type="PackedScene" uid="uid://b3t7d685hmt05" path="res://szenes/player_controller.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://l75ndtky03g3" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b6wanmc4a7atp" path="res://szenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://ci325yswwf6aw" path="res://scripts/level_ui.gd" id="3_1bvp3"]
+[ext_resource type="LabelSettings" uid="uid://de04smxjkwitr" path="res://resources/default_res/label.tres" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(523, 78.5)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(854, 642)
-scale = Vector2(91.32, 2.05009)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(525, 81)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="Level" type="Node2D"]
+script = ExtResource("1_h2yge")
+
+[node name="Ceeling" type="StaticBody2D" parent="."]
+position = Vector2(260, 38)
+scale = Vector2(27.5592, 3.86159)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceeling"]
 shape = SubResource("RectangleShape2D_ig7tw")
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+[node name="ColorRect" type="ColorRect" parent="Ceeling"]
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -21,14 +32,25 @@ offset_bottom = 10.0
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(781, 492)
-scale = Vector2(12, 2.05009)
+[node name="ItemTopSpawner" type="Area2D" parent="Ceeling"]
+position = Vector2(-9.43424, -9.84051)
+scale = Vector2(0.0362855, 0.258961)
+collision_layer = 16
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceeling/ItemTopSpawner"]
+position = Vector2(260.5, 37.75)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Wall_Left" type="StaticBody2D" parent="."]
+position = Vector2(-25, 306)
+scale = Vector2(-2.39582, 62.6973)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Left"]
 shape = SubResource("RectangleShape2D_ig7tw")
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D4"]
+[node name="ColorRect" type="ColorRect" parent="Wall_Left"]
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -36,14 +58,15 @@ offset_bottom = 10.0
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(359, 344)
-scale = Vector2(12, 2.05009)
+[node name="Wall_Right" type="StaticBody2D" parent="."]
+position = Vector2(545, 307)
+scale = Vector2(-2.44396, 62.6973)
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Right"]
 shape = SubResource("RectangleShape2D_ig7tw")
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D5"]
+[node name="ColorRect" type="ColorRect" parent="Wall_Right"]
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -51,66 +74,61 @@ offset_bottom = 10.0
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="."]
-position = Vector2(1055, 262)
-rotation = -0.261799
-scale = Vector2(17.44, 2.05009)
+[node name="PlayerScope" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
-shape = SubResource("RectangleShape2D_ig7tw")
+[node name="Player" parent="PlayerScope" instance=ExtResource("1_ig7tw")]
+position = Vector2(260, 684)
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D7"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
+[node name="BouncyScope" type="Node2D" parent="."]
 
-[node name="StaticBody2D6" type="StaticBody2D" parent="."]
-position = Vector2(1365, 478)
-scale = Vector2(7, 7)
+[node name="ItemScope" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
-shape = SubResource("RectangleShape2D_ig7tw")
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(260, 720)
+collision_layer = 16
+collision_mask = 12
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D6"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 58)
+shape = SubResource("RectangleShape2D_0xm2m")
+debug_color = Color(1, 0.010799, 0.0262463, 0.42)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(1713, 345)
-scale = Vector2(-2.42682, 27.7373)
+[node name="Level-UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 520.0
+offset_bottom = 80.0
+grow_horizontal = 2
+script = ExtResource("3_1bvp3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("RectangleShape2D_ig7tw")
+[node name="LabelHearts" type="Label" parent="Level-UI"]
+layout_mode = 2
+offset_left = 98.0
+offset_top = 20.0
+offset_right = 138.0
+offset_bottom = 62.0
+size_flags_horizontal = 4
+text = "10"
+label_settings = ExtResource("3_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
+[node name="LabelBounces" type="Label" parent="Level-UI"]
+layout_mode = 2
+offset_left = 402.0
+offset_top = 20.0
+offset_right = 442.0
+offset_bottom = 62.0
+text = "0"
+label_settings = ExtResource("3_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(29.0001, 343)
-scale = Vector2(-2.42682, 27.7373)
+[node name="LevelUpTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-shape = SubResource("RectangleShape2D_ig7tw")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D3"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="PlayerController" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(160, 573)
+[connection signal="body_entered" from="Ceeling/ItemTopSpawner" to="." method="_on_item_top_spawner_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="LevelUpTimer" to="." method="_on_level_up_timer_timeout"]

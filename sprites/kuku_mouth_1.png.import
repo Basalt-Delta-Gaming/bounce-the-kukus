@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be5wwo7on74y4"
-path="res://.godot/imported/ball.png-dbfca04ee0bd630c71df985dd5b09bcc.ctex"
+uid="uid://cn8k6rjk1pvd4"
+path="res://.godot/imported/kuku_mouth_1.png-c0fcc92e94b944372d014eddf6e69c45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ball.png"
-dest_files=["res://.godot/imported/ball.png-dbfca04ee0bd630c71df985dd5b09bcc.ctex"]
+source_file="res://sprites/kuku_mouth_1.png"
+dest_files=["res://.godot/imported/kuku_mouth_1.png-c0fcc92e94b944372d014eddf6e69c45.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
